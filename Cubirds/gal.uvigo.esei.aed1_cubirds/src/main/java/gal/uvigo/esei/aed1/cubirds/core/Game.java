@@ -86,7 +86,7 @@ private IU iu;
         player.toString();
         
         int typeBird = iu.readNumber("Introduce la fila a eliminar");
-        List <Card> = player.removeCards(typeBird);
+     
         
         
 
