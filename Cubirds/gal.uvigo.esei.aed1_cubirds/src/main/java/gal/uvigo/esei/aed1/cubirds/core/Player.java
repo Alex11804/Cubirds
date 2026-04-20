@@ -62,6 +62,10 @@ private List<List <Card>> hand;
         return hand.remove(row);
     }
 
+    public void addCapturedCards(List <Card> capturedCards){
+        
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

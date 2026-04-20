@@ -11,7 +11,6 @@ public class Table {
      */ 
     
     public Table() {
-        this.cardsTable = new List[4];
         for (int i = 0; i < cardsTable.length; i++) {
             cardsTable[i] = new LinkedList<>();
         }
@@ -71,6 +70,10 @@ public class Table {
             }
         }
         return false;                                      //Si no , devuelve falso 
+    }
+
+    public List<Card> bajarCartas(){
+        return null;
     }
     
     @Override

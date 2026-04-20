@@ -83,10 +83,8 @@ private IU iu;
 
     public void turnoJugador(Player player){
         iu.displayMessage("Turno de: " + player.getName());
-        player.toString();
-        
-        int typeBird = iu.readNumber("Introduce la fila a eliminar");
-     
+
+        iu.displayMessage(player.toString());
         
         
 
