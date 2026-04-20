@@ -11,6 +11,9 @@ public class Table {
      */ 
     public Table() {
         this.cardsTable = new LinkedList[4];
+        for (int i = 0; i < cardsTable.length; i++) {
+            cardsTable[i] = new LinkedList<>();
+        }
     }
 
     /**
