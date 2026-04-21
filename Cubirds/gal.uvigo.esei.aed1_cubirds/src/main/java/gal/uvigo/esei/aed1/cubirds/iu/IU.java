@@ -70,20 +70,21 @@ public class IU {
     }
 
     public int readRow(String msg){
-        boolean repeat;
         int toret = 0;
-
         do {
-            repeat = false;
-            System.out.print(msg);
-            try {
-                toret = Integer.parseInt(keyboard.nextLine());
-            } catch (NumberFormatException exc) {
-                repeat = true;
-            }
-        } while (repeat && toret < 0 && toret > 3);
+           toret = readNumber(msg);
+        } while ( toret < 0 && toret > 3);
 
         return toret;
     }
+    public int readListPlayer(String msg, int tam){
+        int toret = 0;
+        do {
+           toret = readNumber(msg);
+        } while ( toret < 0 && toret > tam);
+
+        return toret;
+    }
+
 
 }

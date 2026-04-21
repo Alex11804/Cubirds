@@ -82,9 +82,15 @@ private IU iu;
     }
 
     public void turnoJugador(Player player){
+        iu.displayMessage(table.toString());
         iu.displayMessage("Turno de: " + player.getName());
 
         iu.displayMessage(player.toString());
+
+        int numListCard = iu.readListPlayer("Escoge las cartas que quieres bajar 0 " + player.howManyList() + ": ", player.howManyList());
+        List <Card> cartasMesa = player.removeCards(numListCard);
+        int rowTable = iu.readRow("Escoge la fila donde quieres bajar las cartas: ");
+        //pedir la fila y despues el lado de la mesa
         
         
 

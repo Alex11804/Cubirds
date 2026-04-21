@@ -33,15 +33,12 @@ private List<List <Card>> hand;
             hand.get(0).addFirst(card);
         }else{
             int i = 0;
-            boolean encontrado = false;
-            while(i < hand.size() && !encontrado){
-                if(hand.get(i).getFirst().getTypeBird().equals(card.getTypeBird())){
-                    encontrado = true;
-                }else{
-                    i++;
-                }
+
+            while(i < hand.size() && !hand.get(i).getFirst().getTypeBird().equals(card.getTypeBird())){
+                    i++;   
             }
-            if(encontrado){
+
+            if(i < hand.size()){
                 hand.get(i).addFirst(card);
             }else{
                 hand.addLast(new LinkedList<Card>());
