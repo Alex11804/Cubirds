@@ -91,9 +91,8 @@ private IU iu;
         List <Card> cartasMesa = player.removeCards(numListCard);
         int rowTable = iu.readRow("Escoge la fila donde quieres bajar las cartas: ");
         //pedir la fila y despues el lado de la mesa
-        
-        
-
+        int lado= iu.readLado("Elige lado donde quieres bajar las cartas (O-Izquiera y 1-Derecha )"); 
+        player.addCapturedCards(table.bajarCartas(cartasMesa, rowTable, lado)); 
 
 
         player.toString();

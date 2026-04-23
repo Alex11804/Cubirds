@@ -86,5 +86,14 @@ public class IU {
         return toret;
     }
 
+    public int readLado(String msg){
+        int toret = 0;
+        do {
+           toret = readNumber(msg);
+        } while ( toret < 0 && toret > 1);
+
+        return toret;
+    }
+
 
 }

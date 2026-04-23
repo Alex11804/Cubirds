@@ -59,8 +59,10 @@ private List<List <Card>> hand;
         return hand.remove(row);
     }
 
-    public void addCapturedCards(List <Card> capturedCards){
-        
+    public void addCapturedCards(List <Card> capturedCards ){
+        for (Card carta: capturedCards){
+            addCard(carta);
+        }
     }
 
     @Override

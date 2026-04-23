@@ -22,9 +22,9 @@ public class Table {
 
     public void setCard(int row, int lado, Card card){
     
-        if(lado == 1){
+        if(lado == 0){
             cardsTable[row].addFirst(card);
-        }else if (lado == 2){
+        }else if (lado == 1){
             cardsTable[row].addLast(card);
         }
         
@@ -72,8 +72,34 @@ public class Table {
         return false;                                      //Si no , devuelve falso 
     }
 
-    public List<Card> bajarCartas(){
-        return null;
+    public List<Card> bajarCartas(List<Card> listaCartas,int fila,int lado){
+        for (int i=0; i<listaCartas.size(); i++){
+           setCard(fila, lado, listaCartas.getFirst()); 
+        }
+        List<Card> cartasRodeadas = new LinkedList<>(); 
+        int i=0;
+        int j= listaCartas.size(); 
+
+        if (lado==0){
+            while (listaCartas.get(i).equals(listaCartas.getFirst())){
+                i++; 
+            }
+            while (listaCartas.get(i).equals(listaCartas.getFirst()) && i!=listaCartas.size()){
+                cartasRodeadas.addLast(listaCartas.get(i));
+                i++; 
+            }
+            
+        }else {
+            while (listaCartas.get(j).equals(listaCartas.getLast())){
+                j--; 
+            }
+            while (listaCartas.get(j).equals(listaCartas.getLast()) && j!=-1){
+                cartasRodeadas.addFirst(listaCartas.get(j));
+                j--; 
+            }
+        }
+        
+        return listaCartas;
     }
     
     @Override
