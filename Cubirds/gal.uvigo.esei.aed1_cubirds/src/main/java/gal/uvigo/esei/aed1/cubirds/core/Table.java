@@ -24,7 +24,7 @@ public class Table {
     
         if(lado == 0){
             cardsTable[row].addFirst(card);
-        }else if (lado == 1){
+        }else {
             cardsTable[row].addLast(card);
         }
         
@@ -73,8 +73,8 @@ public class Table {
     }
 
     public List<Card> bajarCartas(List<Card> listaCartas,int fila,int lado){
-        for (int i=0; i<listaCartas.size(); i++){
-           setCard(fila, lado, listaCartas.getFirst()); 
+        while(listaCartas.isEmpty()){
+           setCard(fila, lado, listaCartas.removeFirst()); 
         }
         List<Card> cartasRodeadas = new LinkedList<>(); 
         int i=0;
