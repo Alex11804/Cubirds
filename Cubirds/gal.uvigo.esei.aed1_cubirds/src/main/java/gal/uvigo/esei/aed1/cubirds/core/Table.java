@@ -1,5 +1,7 @@
 package gal.uvigo.esei.aed1.cubirds.core;
 
+
+
 import es.uvigo.esei.aed1.tads.list.*;;
 
 public class Table {
@@ -40,13 +42,12 @@ public class Table {
             int column = 0;
             while(column < 3){                 //n columnas de cartas 
                 Card card = deckOfCards.takeCard();           //Por cada columna se guarda en una variable temporal card, la carta que queramos colocar en la mesa (y esta se elimina de la baraja)
-                
-                    if(!sameTypeOfBird(row, card)){         //Si el tipo de pajaro de esa carta es distinto al anterior (en caso de que haya anterior, si no ,se ejecutaría igualmente)
-                        cardsTable[row].addLast(card);;         //Se coloca la carta en la mesa 
-                        column++;                         //Se pasa a la siguiente columna 
-                    }else{                               //En caso de que el tipo de pajaro es igual al anterior
+                if(!sameTypeOfBird(row, card)){         //Si el tipo de pajaro de esa carta es distinto al anterior (en caso de que haya anterior, si no ,se ejecutaría igualmente)
+                    cardsTable[row].addLast(card);;    //Se coloca la carta en la mesa 
+                    column++;                         //Se pasa a la siguiente columna 
+                }else{                               //En caso de que el tipo de pajaro es igual al anterior
                         deckOfCards.addCardToEnd(card); // La carta descartada se añade al final de la baraja para no perderla
-                    }
+                }
                 
             }
         }
@@ -78,28 +79,47 @@ public class Table {
         }
         List<Card> cartasRodeadas = new LinkedList<>(); 
         int i=0;
-        int j= listaCartas.size(); 
+        int j; 
 
         if (lado==0){
-            while (listaCartas.get(i).equals(listaCartas.getFirst())){
+
+            while (cardsTable[fila].get(0).getTypeBird().equals(cardsTable[fila].get(i).getTypeBird())){
                 i++; 
             }
-            while (listaCartas.get(i).equals(listaCartas.getFirst()) && i!=listaCartas.size()){
-                cartasRodeadas.addLast(listaCartas.get(i));
-                i++; 
+            j=i;
+            while (j != cardsTable[fila].size() && !cardsTable[fila].get(i).getTypeBird().equals(cardsTable[fila].get(j).getTypeBird())){
+                j++; 
             }
-            
+            if(j == cardsTable[fila].size()){
+                return cartasRodeadas;
+            }else{
+                while(i < j - 1){
+                    cartasRodeadas.add(cardsTable[fila].remove(i));
+                    i++;
+                }
+            }
         }else {
-            while (listaCartas.get(j).equals(listaCartas.getLast())){
+            i = cardsTable[fila].size() - 1;
+            while (cardsTable[fila].get(cardsTable[fila].size() - 1).getTypeBird().equals(cardsTable[fila].get(i).getTypeBird())){
+                i--; 
+            }
+            j = i;
+            while (j != -1 && !cardsTable[fila].get(i).getTypeBird().equals(cardsTable[fila].get(j).getTypeBird())){
+                cartasRodeadas.addFirst(cardsTable[fila].get(j));
                 j--; 
             }
-            while (listaCartas.get(j).equals(listaCartas.getLast()) && j!=-1){
-                cartasRodeadas.addFirst(listaCartas.get(j));
-                j--; 
+
+            if(j == -1){
+                return cartasRodeadas;
+            }else{
+                while(j + 1 < i){
+                    cartasRodeadas.add(cardsTable[fila].remove(i));
+                    j++;
+                }
             }
         }
         
-        return listaCartas;
+        return cartasRodeadas;
     }
     
     @Override
