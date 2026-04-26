@@ -13,8 +13,9 @@ public class Table {
      */ 
     
     public Table() {
-        for (int i = 0; i < cardsTable.length; i++) {
-            cardsTable[i] = new LinkedList<>();
+        this.cardsTable = new List[4];
+        for (int i = 0; i < 4; i++) {
+            this.cardsTable[i] = new LinkedList<>();
         }
     }
 
@@ -74,7 +75,7 @@ public class Table {
     }
 
     public List<Card> bajarCartas(List<Card> listaCartas,int fila,int lado){
-        while(listaCartas.isEmpty()){
+        while(!listaCartas.isEmpty()){
            setCard(fila, lado, listaCartas.removeFirst()); 
         }
         List<Card> cartasRodeadas = new LinkedList<>(); 
@@ -82,7 +83,7 @@ public class Table {
         int j; 
 
         if (lado==0){
-
+            
             while (cardsTable[fila].get(0).getTypeBird().equals(cardsTable[fila].get(i).getTypeBird())){
                 i++; 
             }
@@ -94,7 +95,7 @@ public class Table {
                 return cartasRodeadas;
             }else{
                 while(i < j - 1){
-                    cartasRodeadas.add(cardsTable[fila].remove(i));
+                    cartasRodeadas.addLast(cardsTable[fila].remove(i));
                     i++;
                 }
             }
@@ -113,12 +114,12 @@ public class Table {
                 return cartasRodeadas;
             }else{
                 while(j + 1 < i){
-                    cartasRodeadas.add(cardsTable[fila].remove(i));
+                    cartasRodeadas.addLast(cardsTable[fila].remove(i));
                     j++;
                 }
             }
         }
-        
+
         return cartasRodeadas;
     }
     

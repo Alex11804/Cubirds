@@ -87,11 +87,11 @@ private IU iu;
 
         iu.displayMessage(player.toString());
 
-        int numListCard = iu.readListPlayer("Escoge las cartas que quieres bajar 0 " + player.howManyList() + ": ", player.howManyList());
+        int numListCard = iu.readListPlayer("Escoge el tipo de pájaro que quieres bajar 0-" + player.howManyList() + ": ", player.howManyList());
         List <Card> cartasMesa = player.removeCards(numListCard);
         int rowTable = iu.readRow("Escoge la fila donde quieres bajar las cartas: ");
         //pedir la fila y despues el lado de la mesa
-        int lado= iu.readLado("Elige lado donde quieres bajar las cartas (O-Izquiera y 1-Derecha )"); 
+        int lado= iu.readLado("Elige lado donde quieres bajar las cartas (O-Izquiera y 1-Derecha): "); 
         player.addCapturedCards(table.bajarCartas(cartasMesa, rowTable, lado)); 
 
 

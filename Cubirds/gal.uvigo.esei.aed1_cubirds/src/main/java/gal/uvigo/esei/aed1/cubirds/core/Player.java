@@ -52,7 +52,7 @@ private List<List <Card>> hand;
     }
 
     public int howManyList(){
-        return hand.size();
+        return hand.size() - 2;
     }
 
     public List<Card> removeCards(int row){
