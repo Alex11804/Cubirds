@@ -70,27 +70,27 @@ public class IU {
     }
 
     public int readRow(String msg){
-        int toret = 0;
+        int toret =-1;
         do {
            toret = readNumber(msg);
-        } while ( toret < 0 && toret > 3);
+        } while ( toret < 0 || toret > 3);
 
         return toret;
     }
     public int readListPlayer(String msg, int tam){
-        int toret = 0;
+        int toret = -1;
         do {
            toret = readNumber(msg);
-        } while ( toret < 0 && toret > tam);
+        } while ( toret < 0 || toret > tam);
 
         return toret;
     }
 
     public int readLado(String msg){
-        int toret = 0;
+        int toret = -1;
         do {
            toret = readNumber(msg);
-        } while ( toret < 0 && toret > 1);
+        } while ( toret < 0 || toret > 1);
 
         return toret;
     }

@@ -2,7 +2,7 @@ package gal.uvigo.esei.aed1.cubirds.core;
 
 import es.uvigo.esei.aed1.tads.list.*;
 import gal.uvigo.esei.aed1.cubirds.iu.IU;
-import java.util.Scanner;
+
 
 public class Game {
 private DeckOfCards deckOfCards;

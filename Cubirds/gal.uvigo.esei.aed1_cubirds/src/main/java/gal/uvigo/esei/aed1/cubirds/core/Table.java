@@ -81,41 +81,42 @@ public class Table {
         List<Card> cartasRodeadas = new LinkedList<>(); 
         int i=0;
         int j; 
-
+       
         if (lado==0){
             
-            while (cardsTable[fila].get(0).getTypeBird().equals(cardsTable[fila].get(i).getTypeBird())){
+           TypeBird tipoInicial = cardsTable[fila].get(0).getTypeBird(); 
+            while (i<cardsTable[fila].size()&& cardsTable[fila].get(i).getTypeBird().equals(tipoInicial)){
                 i++; 
             }
             j=i;
-            while (j != cardsTable[fila].size() && !cardsTable[fila].get(i).getTypeBird().equals(cardsTable[fila].get(j).getTypeBird())){
+            while (j != cardsTable[fila].size() && !tipoInicial.equals(cardsTable[fila].get(j).getTypeBird())){
                 j++; 
             }
             if(j == cardsTable[fila].size()){
                 return cartasRodeadas;
             }else{
-                while(i < j - 1){
+                while(i <= j - 1){
                     cartasRodeadas.addLast(cardsTable[fila].remove(i));
-                    i++;
+                    j--;
                 }
             }
         }else {
             i = cardsTable[fila].size() - 1;
-            while (cardsTable[fila].get(cardsTable[fila].size() - 1).getTypeBird().equals(cardsTable[fila].get(i).getTypeBird())){
+            TypeBird tipoInicial = cardsTable[fila].get(i).getTypeBird();
+            while (i>=0 && tipoInicial.equals(cardsTable[fila].get(i).getTypeBird())){
                 i--; 
             }
             j = i;
-            while (j != -1 && !cardsTable[fila].get(i).getTypeBird().equals(cardsTable[fila].get(j).getTypeBird())){
-                cartasRodeadas.addFirst(cardsTable[fila].get(j));
+            while (j != -1 && !tipoInicial.equals(cardsTable[fila].get(j).getTypeBird())){
                 j--; 
             }
 
             if(j == -1){
                 return cartasRodeadas;
             }else{
-                while(j + 1 < i){
-                    cartasRodeadas.addLast(cardsTable[fila].remove(i));
-                    j++;
+                while(j + 1 <= i){
+                    cartasRodeadas.addLast(cardsTable[fila].remove(j+1));
+                    i--;
                 }
             }
         }
@@ -128,7 +129,7 @@ public class Table {
         System.out.println("Mesa: ");
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < 4; i++) {                       //Bucle que controla las filas (tienen que ser 4)
-            sb.append("Fila ").append(i + 1).append(": "); //Cada vez que empieza una fila, añade el texto "Fila 1: ", "Fila 2: ", etc.
+            sb.append("Fila ").append(i ).append(": "); //Cada vez que empieza una fila, añade el texto "Fila 1: ", "Fila 2: ", etc.
             for (int j = 0; j < cardsTable[i].size(); j++) {                 //Bucle que controla las columnas 
                 sb.append(cardsTable[i].get(j).toString());  //Muestra cada carta, de la manera que se indica en el toString de Cards (ya que cardsTable[][] , lo inicializamos en el constructor como tipo carta )
             }
