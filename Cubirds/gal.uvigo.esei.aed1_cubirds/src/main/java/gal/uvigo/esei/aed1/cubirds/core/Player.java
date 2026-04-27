@@ -53,7 +53,7 @@ private List<List <Card>> hand;
     }
 
     public int howManyList(){
-        return hand.size() - 2;
+        return hand.size() ;            //!! quite el menos dos para poder elegir todas las listas
     }
 
     public List<Card> removeCards(int row){
@@ -70,7 +70,7 @@ private List<List <Card>> hand;
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(name).append(":\n");  //Se muestra el jugador 
-        for (int i = 0; i < hand.size() - 1 ; i++) {
+        for (int i = 0; i < hand.size() ; i++) {     //recorremos TODA la mano (incluida nuevas filas) (hand.size())
             sb.append(i + ". // ");
             for(Card c:hand.get(i)){   //Recorre todas las cartas que tiene en la mano ese jugador 
                 sb.append(c).append(" // ");;   //Las muestra 
