@@ -28,21 +28,22 @@ private List<List <Card>> hand;
      */
 
     public void addCard(Card card){
-        if(hand.isEmpty()){
-            hand.addFirst(new LinkedList<Card>());
-            hand.get(0).addFirst(card);
+        if(hand.isEmpty()){                                            //Si aun no hay cartas
+            hand.addFirst(new LinkedList<Card>());                    //Se crea una nueva lista 
+            hand.get(0).addFirst(card);                              //Se añade la 1º carta en esa lista 
         }else{
             int i = 0;
-
+             
+        //Se recorre hand , se compara el tipo de ave de la nueva carta con el tipo de ave de la primera carta de cada sublista 
             while(i < hand.size() && !hand.get(i).getFirst().getTypeBird().equals(card.getTypeBird())){
                     i++;   
             }
 
-            if(i < hand.size()){
-                hand.get(i).addFirst(card);
-            }else{
-                hand.addLast(new LinkedList<Card>());
-                hand.get(i).addFirst(card);
+            if(i < hand.size()){                      //Si ENCUENTRA un grupo del mismo tipo
+                hand.get(i).addFirst(card);          //Añade la carta de ese tipo al principio  (La carta se agrupa con las de su mismo tipo)
+            }else{                                  //Si NO ENCUENTRA ninguna sublista de ese tipo
+                hand.addLast(new LinkedList<Card>());  //Se crea una nueva sublista al final 
+                hand.get(i).addFirst(card);           //Se añade en esa sublista el nuevo tipo
             }
         }
     } 
