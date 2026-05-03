@@ -36,7 +36,7 @@ private List<List <Card>> hand;
              
         //Se recorre hand , se compara el tipo de ave de la nueva carta con el tipo de ave de la primera carta de cada sublista 
             while(i < hand.size() && !hand.get(i).getFirst().getTypeBird().equals(card.getTypeBird())){
-                    i++;   
+                    i++;                                 //Mientras que no llegas al final de la mano y el tipo es distinto 
             }
 
             if(i < hand.size()){                      //Si ENCUENTRA un grupo del mismo tipo
@@ -51,16 +51,22 @@ private List<List <Card>> hand;
     public boolean handIsEmpty(){
         return hand.isEmpty();
     }
-
+    
     public int howManyList(){
         return hand.size() ;            //!! quite el menos dos para poder elegir todas las listas
     }
 
+    /**
+     * removeCards: elimina una fila entera de cartas de la mano del jugador 
+     */
     public List<Card> removeCards(int row){
         return hand.remove(row);
     }
 
-    public void addCapturedCards(List <Card> capturedCards ){
+    /**
+     * addCaptureCard: añade las cartas rodeadas a la mano
+     */
+    public void addCapturedCards(List <Card> capturedCards ){  
         for (Card carta: capturedCards){
             addCard(carta);
         }

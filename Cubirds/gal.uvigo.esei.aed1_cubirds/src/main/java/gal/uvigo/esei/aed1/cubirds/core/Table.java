@@ -9,7 +9,7 @@ public class Table {
 
     
     /**
-     * Constructor: Se crea un array vacío de 4 filas
+     * Constructor: Se crea un array vacío formado por 4 listas (array de listas)
      */ 
     
     public Table() {
@@ -25,9 +25,9 @@ public class Table {
 
     public void setCard(int row, int lado, Card card){
     
-        if(lado == 0){
+        if(lado == 0){                           //Si se añade por la izquierda
             cardsTable[row].addFirst(card);
-        }else {
+        }else {                                 //Si se añade por la derecha
             cardsTable[row].addLast(card);
         }
         
@@ -47,7 +47,7 @@ public class Table {
                     cardsTable[row].addLast(card);;    //Se coloca la carta en la mesa 
                     column++;                         //Se pasa a la siguiente columna 
                 }else{                               //En caso de que el tipo de pajaro es igual al anterior
-                        deckOfCards.addCardToEnd(card); // La carta descartada se añade al final de la baraja para no perderla
+                    deckOfCards.addCardToEnd(card); // La carta descartada se añade al final de la baraja para no perderla
                 }
                 
             }
@@ -75,47 +75,63 @@ public class Table {
     }
 
     public List<Card> bajarCartas(List<Card> listaCartas,int fila,int lado){
-        while(!listaCartas.isEmpty()){
-           setCard(fila, lado, listaCartas.removeFirst()); 
+
+        //1º COLOCAR LAS CARTAS EN LA MESA 
+        while(!listaCartas.isEmpty()){                          //Mientras que haya cartas en listaCartas
+           setCard(fila, lado, listaCartas.removeFirst());     //Saca una carta (removeFirst) y la coloca en la mesa (setCard)
         }
-        List<Card> cartasRodeadas = new LinkedList<>(); 
+        List<Card> cartasRodeadas = new LinkedList<>();       //Creamos una lista para guardar las cartas capturadas 
         int i=0;
         int j; 
        
-        if (lado==0){
+        if (lado==0){  //JUGAMOS POR EL LADO IZQUIERDO , lado=0
             
-           TypeBird tipoInicial = cardsTable[fila].get(0).getTypeBird(); 
-            while (i<cardsTable[fila].size()&& cardsTable[fila].get(i).getTypeBird().equals(tipoInicial)){
-                i++; 
-            }
+           TypeBird tipoInicial = cardsTable[fila].get(0).getTypeBird(); //Tipo de la primera carta en la fila (del array de cartas)
+           
+           //Mientras no llegemos al final de la fila y la carta sea del mismo tipo que la inicial
+           while (i<cardsTable[fila].size()&& cardsTable[fila].get(i).getTypeBird().equals(tipoInicial)){
+                i++;   //Avanzamos 
+            }//El tipo de carta ya no es el mismo(Encontramos el final del 1º bloque )
+
+            //Buscamos otro bloque del mismo tipo pero mas a la drecha 
             j=i;
+            //Mientras j no llegue al final de la fila y el tipo inicial sea distinto al tipo de cartas 
             while (j != cardsTable[fila].size() && !tipoInicial.equals(cardsTable[fila].get(j).getTypeBird())){
-                j++; 
+                j++;   //Avanzamos 
             }
-            if(j == cardsTable[fila].size()){
+
+            //SI NO SE VOLVIO A ENCONTRAR UNA CARTA DEL MISMO TIPO 
+            if(j == cardsTable[fila].size()){  //No hay captura 
                 return cartasRodeadas;
-            }else{
+            }else{                            //SI SI SE ENCONTRO OTRA CARTA DEL MISMO TIPO
                 while(i <= j - 1){
-                    cartasRodeadas.addLast(cardsTable[fila].remove(i));
+                    cartasRodeadas.addLast(cardsTable[fila].remove(i)); //Se quitan las cartas que estan en el medio de las cartas del mismo tipo 
                     j--;
                 }
             }
-        }else {
-            i = cardsTable[fila].size() - 1;
-            TypeBird tipoInicial = cardsTable[fila].get(i).getTypeBird();
+        }else {  //JUGAMOS POR EL LADO DERECHO, lado=1
+            i = cardsTable[fila].size() - 1; //Empezamos desde el final 
+            TypeBird tipoInicial = cardsTable[fila].get(i).getTypeBird(); //Tipo de carta del que partimos 
+
+            //Mientras no llegues al final de la fila y el tipo incial de la carta sea el mismo en el que estamos
             while (i>=0 && tipoInicial.equals(cardsTable[fila].get(i).getTypeBird())){
-                i--; 
-            }
+                i--;   //Avanzamos 
+            }//El tipo de carta ya no es el mismo (Encontramos el final del 1º bloque)
+
+            //Buscamos otro bloque del mismo tipo pero mas a la izquierda
             j = i;
+
+            //Mientras no llegemos al final de la lista (teniendo en cuenta el ultimo elemento) y el tipo de la carta actual sea distinto al de la inicial
             while (j != -1 && !tipoInicial.equals(cardsTable[fila].get(j).getTypeBird())){
-                j--; 
+                j--;   //Avanzamos 
             }
 
+            //SI NO SE VOLVIO A ENCONTRAR UNA CARTA DEL MISMO TIPO 
             if(j == -1){
-                return cartasRodeadas;
-            }else{
+                return cartasRodeadas;   //no hay captura 
+            }else{                      //SI SI SE ENCONTRO OTRA CARTA DEL MISMO TIPO 
                 while(j + 1 <= i){
-                    cartasRodeadas.addLast(cardsTable[fila].remove(j+1));
+                    cartasRodeadas.addLast(cardsTable[fila].remove(j+1)); //Se quitan las cartas que estan en el medio de las cartas del mismo tipo 
                     i--;
                 }
             }

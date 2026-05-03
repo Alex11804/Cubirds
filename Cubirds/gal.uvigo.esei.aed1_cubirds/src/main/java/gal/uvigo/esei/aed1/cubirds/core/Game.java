@@ -30,13 +30,10 @@ private IU iu;
 
         
         playCards();
-
-
-
     }
 
       /**
-     * dealCardsToPlayer:Inicializar los jugadores y definirlos 
+     * createPlayers:Inicializar los jugadores y definirlos 
      */
 
     public void createPlayers(){
@@ -65,34 +62,41 @@ private IU iu;
         }
     }
 
+    /**
+     * playCards: Jugar cartas, hasta que uno see queda sin cartas
+     */
+
     public void playCards(){
-        boolean finRonda = false;
-        int i = 0;
-        while(!finRonda){
-            if(i == players.size()){
-                i = 0;
+        boolean finRonda = false;                  //Indica si la ronda ha terminado
+        int i = 0;                                                  
+            while(!finRonda){                     //Mientras que no se acaba la ronda              
+            if(i == players.size()){             //Si llegas al final de los jugadores
+                i = 0;                          //Vuelves al principio
             } 
-            turnoJugador(players.get(i));
-            if(players.get(i).handIsEmpty()){
-                finRonda = true;
+            turnoJugador(players.get(i));      //el jugador ejecuta su turno
+            if(players.get(i).handIsEmpty()){ //Si el jugador se quedó sin cartas
+                finRonda = true;             //Se acabo la ronda
             }
-            i++;
+            i++;                            //Si no se quedo sin cartas-> siguiente jugador
         }
         iu.displayMessage(players.get(i - 1).getName() + " se ha quedado sin cartas");
     }
 
+    /**
+     * turnoJugador: el jugador juega su turno 
+     */
     public void turnoJugador(Player player){
-        iu.displayMessage(table.toString());
-        iu.displayMessage("Turno de: " + player.getName());
+        iu.displayMessage(table.toString());  //Se muestra la mesa 
+        iu.displayMessage("Turno de: " + player.getName()); 
 
-        iu.displayMessage(player.toString());
+        iu.displayMessage(player.toString()); //Se muestran las cartas que tiene ese jugador
 
-        int numListCard = iu.readListPlayer("Escoge el tipo de pájaro que quieres bajar 0-" + player.howManyList() + ": ", player.howManyList());
-        List <Card> cartasMesa = player.removeCards(numListCard);
-        int rowTable = iu.readRow("Escoge la fila donde quieres bajar las cartas: ");
-        //pedir la fila y despues el lado de la mesa
+        int numListCard = iu.readListPlayer("Escoge el tipo de pájaro que quieres bajar 0-" + (player.howManyList() - 1) + ": ", player.howManyList());
+        List <Card> cartasMesa = player.removeCards(numListCard);  //El jugador saca una fila entera de cartas de su mano para jugarlas (se guardan en una variable temporal)
+        int rowTable = iu.readRow("Escoge la fila donde quieres bajar las cartas: ");   //escoje la fila donde quiere jugar
+        //despues escoje el lado de la fila
         int lado= iu.readLado("Elige lado donde quieres bajar las cartas (O-Izquiera y 1-Derecha): "); 
-        player.addCapturedCards(table.bajarCartas(cartasMesa, rowTable, lado)); 
+        player.addCapturedCards(table.bajarCartas(cartasMesa, rowTable, lado)); //Coloca las cartas en la mesa (devuelve las cartas capturadas si hay) y añade esas cartas al jugafor 
 
 
         player.toString();

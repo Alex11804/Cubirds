@@ -23,17 +23,17 @@ public class DeckOfCards {
      */
 
     public void shuffle(){
-        Random random = new Random();
-        for(int i = 0 ; i <= 109 ; i++){   
-            int numero = random.nextInt(109);
-            Card temp = cards.get(i);
-            cards.set(i, cards.get(numero));
-            cards.set(numero, temp);
+        Random random = new Random();            //Creamos un objeto random para generar numeros aleatorios 
+        for(int i = 0 ; i <= 109 ; i++){        //Recorremos las 110 cartas que tenemos 
+            int numero = random.nextInt(109);  // Generamos el numero alatorio-> que usamos como indice (posicion de 1 carta)
+            Card temp = cards.get(i);         //Guardamos la carta actual en una variable temporal
+            cards.set(i, cards.get(numero)); //Intercambias la carta en la posicion i con la carta en la posicion aleatoria numero
+            cards.set(numero, temp);        //Pones en numero la carta original de i (guardada en temp)
         }
     }
 
     /**
-     * takeCard: Elimina la última carta de la lista, para que ya no estea en la baraja 
+     * takeCard: Elimina la primera carta de la lista, para que ya no estea en la baraja 
      */
 
     public Card takeCard(){
