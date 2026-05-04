@@ -6,11 +6,12 @@ import es.uvigo.esei.aed1.tads.list.*;
 public class Player {
 private String name;
 private List<List <Card>> hand;
-
+private int[] contador; 
 
     public Player(String name) {
         this.name = name;
         this.hand = new LinkedList<>();
+        this.contador = new int[8];
     }
 
     /**

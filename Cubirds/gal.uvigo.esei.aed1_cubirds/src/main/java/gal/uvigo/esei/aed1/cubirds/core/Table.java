@@ -12,6 +12,7 @@ public class Table {
      * Constructor: Se crea un array vacío formado por 4 listas (array de listas)
      */ 
     
+    @SuppressWarnings("unchecked")
     public Table() {
         this.cardsTable = new List[4];
         for (int i = 0; i < 4; i++) {
