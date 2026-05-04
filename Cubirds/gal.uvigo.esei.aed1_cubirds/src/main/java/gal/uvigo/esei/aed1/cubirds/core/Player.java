@@ -53,7 +53,7 @@ private List<List <Card>> hand;
     }
     
     public int howManyList(){
-        return hand.size() ;            //!! quite el menos dos para poder elegir todas las listas
+        return hand.size() ;           
     }
 
     /**

@@ -26,7 +26,7 @@ private IU iu;
         dealCardsToPlayer();
         table.fillTable(deckOfCards);
         iu.displayMessage(table.toString());
-        iu.showCardsPlayers(players);
+        iu.showCardsPlayers(players);//quitarlo
 
         
         playCards();
@@ -66,7 +66,7 @@ private IU iu;
      * playCards: Jugar cartas, hasta que uno see queda sin cartas
      */
 
-    public void playCards(){
+    public void playCards(){ // HACER UN DO WHILE 
         boolean finRonda = false;                  //Indica si la ronda ha terminado
         int i = 0;                                                  
             while(!finRonda){                     //Mientras que no se acaba la ronda              
