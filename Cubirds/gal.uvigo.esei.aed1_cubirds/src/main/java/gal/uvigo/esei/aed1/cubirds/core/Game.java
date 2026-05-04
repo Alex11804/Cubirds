@@ -99,7 +99,7 @@ private IU iu;
         player.addCapturedCards(table.bajarCartas(cartasMesa, rowTable, lado)); //Coloca las cartas en la mesa (devuelve las cartas capturadas si hay) y añade esas cartas al jugafor 
 
 
-        player.toString();
+        iu.displayMessage(player.toString());
         
     }
     
