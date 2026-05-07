@@ -39,7 +39,7 @@ public class Table {
      * fillTable: Colocar las cartas en la mesa, de manera que no haya dos especies de pajaros iguales seguidos *
      */
 
-    public void fillTable(DeckOfCards deckOfCards){
+    public void fillTable(DeckOfCards deckOfCards, DiscardedCards discardedCards){
         for (int row = 0; row < 4; row++) {     //4 filas de cartas 
             int column = 0;
             while(column < 3){                 //n columnas de cartas 
@@ -48,7 +48,7 @@ public class Table {
                     cardsTable[row].addLast(card);;    //Se coloca la carta en la mesa 
                     column++;                         //Se pasa a la siguiente columna 
                 }else{                               //En caso de que el tipo de pajaro es igual al anterior
-                    deckOfCards.addCardToEnd(card); // La carta descartada se añade al final de la baraja para no perderla
+                    discardedCards.addCardToEnd(card); // La carta descartada se añade al final de la baraja para no perderla
                 }
                 
             }

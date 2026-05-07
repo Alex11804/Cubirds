@@ -12,10 +12,6 @@ public class DiscardedCards {
         discardedCards.addLast(card);;
     }
 
-    public List<Card> getDiscartedCards(){
-        return discardedCards;
-    }
-
     public boolean isEmpty (){
         return discardedCards.size()==0; 
     }

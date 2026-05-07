@@ -26,7 +26,7 @@ private IU iu;
         createPlayers();
         deckOfCards.shuffle();
         dealCardsToPlayer();
-        table.fillTable(deckOfCards);
+        table.fillTable(deckOfCards, discardedCards);
         iu.displayMessage(table.toString());
     
         playCards();
@@ -91,24 +91,30 @@ private IU iu;
 
         iu.displayMessage(player.toString()); //Se muestran las cartas que tiene ese jugador
 
-        int numListCard = iu.readListPlayer("Escoge el tipo de pájaro que quieres bajar 0-" + (player.howManyList() - 1) + ": ", player.howManyList());
-        List <Card> cartasMesa = player.removeCards(numListCard);  //El jugador saca una fila entera de cartas de su mano para jugarlas (se guardan en una variable temporal)
+        int birdList = iu.readListPlayer("Escoge el tipo de pájaro que quieres bajar 0-" + (player.howManyList() - 1) + ": ", player.howManyList());
+        List <Card> cardsToTable = player.removeCards(birdList);  //El jugador saca una fila entera de cartas de su mano para jugarlas (se guardan en una variable temporal)
         int rowTable = iu.readRow("Escoge la fila donde quieres bajar las cartas: ");   //escoje la fila donde quiere jugar
         //despues escoje el lado de la fila
         int lado= iu.readLado("Elige lado donde quieres bajar las cartas (O-Izquiera y 1-Derecha): "); 
-        player.addCapturedCards(table.bajarCartas(cartasMesa, rowTable, lado)); //Coloca las cartas en la mesa (devuelve las cartas capturadas si hay) y añade esas cartas al jugafor 
+        player.addCapturedCards(table.bajarCartas(cardsToTable, rowTable, lado)); //Coloca las cartas en la mesa (devuelve las cartas capturadas si hay) y añade esas cartas al jugafor 
         iu.displayMessage(player.toString());
        
         do{ 
-           if (deckOfCards.isEmpty()){
-           while (!discardedCards.isEmpty()){
-            deckOfCards.addCardToEnd(discardedCards.removeCard());
-           }
-           }
+            if (deckOfCards.isEmpty()){
+                while (!discardedCards.isEmpty()){
+                    deckOfCards.addCardToEnd(discardedCards.removeCard());
+                }
+            }
             table.setCard(rowTable, lado, deckOfCards.takeCard());
 
         }while (table.validRow(rowTable)==false);  
-      }  
+
+        int decision = iu.readLado("Deseas añadir una especie a tu zona de juego (0- No, 1- Si)");
+        if (decision == 1){
+            int selectedBird = iu.readListPlayer("Escoge el pájaro que quieres añadir al contador 0-" + (player.howManyList() - 1) + ": ", player.howManyList());
+            player.increaseCount(selectedBird);
+        }
+      } 
     
     
 }
