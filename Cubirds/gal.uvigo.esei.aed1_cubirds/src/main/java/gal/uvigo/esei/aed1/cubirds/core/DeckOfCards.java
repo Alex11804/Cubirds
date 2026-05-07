@@ -18,6 +18,10 @@ public class DeckOfCards {
         }
     }
 
+    public boolean isEmpty (){
+        return cards.size()==0; 
+    }
+
     /**
      * shuffle: Barajar las cartas 
      */

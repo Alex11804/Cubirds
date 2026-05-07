@@ -137,8 +137,17 @@ public class Table {
                 }
             }
         }
+        return cartasRodeadas; 
+    }
 
-        return cartasRodeadas;
+    public boolean validRow (int fila){
+        TypeBird tipoPajaro = cardsTable [fila].get(0).getTypeBird(); 
+        for (int i = 0; i < cardsTable[fila].size(); i++) {
+            if(!tipoPajaro.equals(cardsTable[fila].get(i).getTypeBird())){
+               return true; 
+            }            
+        }
+        return false; 
     }
     
     @Override

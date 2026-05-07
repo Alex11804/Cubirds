@@ -16,6 +16,14 @@ public class DiscardedCards {
         return discardedCards;
     }
 
+    public boolean isEmpty (){
+        return discardedCards.size()==0; 
+    }
+
+    public Card removeCard (){
+        return discardedCards.removeLast(); 
+    }
+
     
 
 }

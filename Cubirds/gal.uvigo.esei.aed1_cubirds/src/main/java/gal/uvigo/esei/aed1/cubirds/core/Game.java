@@ -8,12 +8,14 @@ public class Game {
 private DeckOfCards deckOfCards;
 private List<Player> players;
 private Table table;
+private DiscardedCards discardedCards; 
 private IU iu;
 
     public Game(IU iu) {
         this.deckOfCards = new DeckOfCards();
         this.players = new LinkedList<>();
         this.table = new Table();
+        this.discardedCards= new DiscardedCards(); 
         this.iu = iu;
     }
 
@@ -95,10 +97,20 @@ private IU iu;
         //despues escoje el lado de la fila
         int lado= iu.readLado("Elige lado donde quieres bajar las cartas (O-Izquiera y 1-Derecha): "); 
         player.addCapturedCards(table.bajarCartas(cartasMesa, rowTable, lado)); //Coloca las cartas en la mesa (devuelve las cartas capturadas si hay) y añade esas cartas al jugafor 
-
-
         iu.displayMessage(player.toString());
-        
-    }
+       
+        do{ 
+           if (deckOfCards.isEmpty()){
+           while (!discardedCards.isEmpty()){
+            deckOfCards.addCardToEnd(discardedCards.removeCard());
+           }
+           }
+            table.setCard(rowTable, lado, deckOfCards.takeCard());
+
+        }while (table.validRow(rowTable)==false);  
+      }  
+    
     
 }
+
+
