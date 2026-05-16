@@ -28,8 +28,20 @@ private IU iu;
         dealCardsToPlayer();
         table.fillTable(deckOfCards, discardedCards);
         iu.displayMessage(table.toString());
-    
-        playCards();
+        do{
+            playCards();
+        }while(dealCardsToPlayer());
+        
+        int maxCont=0;
+        int posPlayer=0;
+        for(int i = 0; i<players.size(); i++){
+            if(players.get(i).getCount()>maxCont){
+                maxCont=players.get(i).getCount();
+                posPlayer = i;
+            }
+        }
+        iu.displayMessage("El ganador es: " + players.get(posPlayer).getName() + " con " + maxCont + " pajaros bajados");
+        
     }
 
       /**
@@ -51,15 +63,18 @@ private IU iu;
     /**
      * dealCardsToPlayer: Repartir 8 cartas a los jugadores 
      */
-    public void dealCardsToPlayer(){
+    public boolean dealCardsToPlayer(){
         for (int i = 0; i < 8; i++) {      //Bucle para cuando i=7 (igual a 8 cartas)
             for (Player player:players) {  //Recorre todos los jugadores
                 Card card = deckOfCards.takeCard();  //Saca una carta de la baraja y la guarda en la variable cards
                 if(card != null){                    //Si quedan cartas en el mazo -> Añade esa carta que se ha eliminado de la baraja al jugador
                     player.addCard(card);
+                }else{
+                    return false;
                 }
             }
         }
+        return true;
     }
 
     /**
@@ -67,6 +82,7 @@ private IU iu;
      */
 
     public void playCards(){ // HACER UN DO WHILE 
+        
         boolean finRonda = false;                  //Indica si la ronda ha terminado
         int i = 0;                                                  
         do{                     //Mientras que no se acaba la ronda              
@@ -79,7 +95,14 @@ private IU iu;
             }
             i++;                            //Si no se quedo sin cartas-> siguiente jugador
         }while(!finRonda);
-        iu.displayMessage(players.get(i - 1).getName() + " se ha quedado sin cartas");
+        for(Player player : players){
+            int j = 0;
+            while(!player.handIsEmpty()){
+                discardedCards.addCardToEnd(player.removeCards(j));
+            }
+            deckOfCards.addListCards(discardedCards.removeCards());
+        }
+
     }
 
     /**
@@ -102,7 +125,7 @@ private IU iu;
         do{ 
             if (deckOfCards.isEmpty()){
                 while (!discardedCards.isEmpty()){
-                    deckOfCards.addCardToEnd(discardedCards.removeCard());
+                    deckOfCards.addListCards(discardedCards.removeCards());
                 }
             }
             table.setCard(rowTable, lado, deckOfCards.takeCard());
@@ -112,8 +135,18 @@ private IU iu;
         int decision = iu.readLado("Deseas añadir una especie a tu zona de juego (0- No, 1- Si)");
         if (decision == 1){
             int selectedBird = iu.readListPlayer("Escoge el pájaro que quieres añadir al contador 0-" + (player.howManyList() - 1) + ": ", player.howManyList());
-            player.increaseCount(selectedBird);
+            if(player.increaseCount(selectedBird)){
+                discardedCards.addCardToEnd(player.removeCards(selectedBird));
+            }else{
+                iu.displayMessage("No es posible bajar esa especie a la zona de juego");
+            }
         }
+        if(player.winner()){
+            iu.displayMessage(player.getName() + "ha conseguido 7 especies de pajaros distintas");
+        }else{
+
+        }
+        
       } 
     
     

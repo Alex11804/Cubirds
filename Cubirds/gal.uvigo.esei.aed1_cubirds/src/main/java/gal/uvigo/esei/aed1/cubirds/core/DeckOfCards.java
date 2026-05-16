@@ -55,4 +55,11 @@ public class DeckOfCards {
     public void addCardToEnd(Card card){  
         cards.addLast(card);;
     }
+
+    public void addListCards(List<Card> cards){  
+        for(Card card : cards){
+            cards.addLast(card);
+        }
+        
+    }
 }

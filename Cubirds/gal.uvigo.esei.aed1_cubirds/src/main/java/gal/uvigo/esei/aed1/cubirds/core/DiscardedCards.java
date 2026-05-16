@@ -8,16 +8,18 @@ public class DiscardedCards {
         this.discardedCards = new LinkedList<>();
     }
 
-    public void addCardToEnd(Card card){  
-        discardedCards.addLast(card);;
+    public void addCardToEnd(List<Card> cards){   //ES mejor añadir listas
+        for(Card card : cards){
+            discardedCards.addLast(card);
+        }
     }
 
     public boolean isEmpty (){
         return discardedCards.size()==0; 
     }
 
-    public Card removeCard (){
-        return discardedCards.removeLast(); 
+    public List<Card> removeCards (){  //Solo se elimina toda la lista
+        return discardedCards; 
     }
 
     

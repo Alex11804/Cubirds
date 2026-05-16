@@ -6,12 +6,12 @@ import es.uvigo.esei.aed1.tads.list.*;
 public class Player {
 private String name;
 private List<List <Card>> hand;
-private List<TypeBird> count; 
+private int[] count; 
 
     public Player(String name) {
         this.name = name;
         this.hand = new LinkedList<>();
-        this.count = new LinkedList<>();
+        this.count = new int[TypeBird.values().length];
     }
 
     /**
@@ -74,18 +74,34 @@ private List<TypeBird> count;
     }
 
 
-    public void increaseCount(int selectedBird){
+    public boolean increaseCount(int selectedBird){
         if(hand.get(selectedBird).size()>hand.get(selectedBird).getFirst().getSmallFlock()){
             TypeBird selectedType = hand.get(selectedBird).getFirst().getTypeBird();
-            if(!count.contains(selectedType)){
-                count.addLast(selectedType);
-            }
+            count[selectedType.ordinal()]++;
+            return true;
         }
+        return false;
     }
 
-    public int getCount(){
-        return count.size();
+    public int getCount() {
+        int contador = 0;
+        for (int i = 0; i < count.length; i++) {
+            count[i]+=contador;
+        }
+        return contador;
     }
+
+    public boolean winner(){
+        int contador=0;
+        for (int i = 0; i < count.length; i++) {
+            if(count[i]>0){
+                contador++;
+            }
+        }
+        return (contador >= 7);
+    }
+
+    
 
     @Override
     public String toString() {

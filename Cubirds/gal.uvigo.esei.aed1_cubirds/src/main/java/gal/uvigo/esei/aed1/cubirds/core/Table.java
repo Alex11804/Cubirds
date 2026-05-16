@@ -48,7 +48,7 @@ public class Table {
                     cardsTable[row].addLast(card);;    //Se coloca la carta en la mesa 
                     column++;                         //Se pasa a la siguiente columna 
                 }else{                               //En caso de que el tipo de pajaro es igual al anterior
-                    discardedCards.addCardToEnd(card); // La carta descartada se añade al final de la baraja para no perderla
+                    deckOfCards.addCardToEnd(card); // La carta descartada se añade al final de la baraja para no perderla
                 }
                 
             }
