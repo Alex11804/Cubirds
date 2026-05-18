@@ -2,7 +2,7 @@ package gal.uvigo.esei.aed1.cubirds.core;
 
 
 
-import es.uvigo.esei.aed1.tads.list.*;;
+import es.uvigo.esei.aed1.tads.list.*;
 
 public class Table {
     private List<Card>[] cardsTable;  //Se crea un array de cartas 
@@ -14,7 +14,7 @@ public class Table {
     
     @SuppressWarnings("unchecked")
     public Table() {
-        this.cardsTable = new List[4];
+        this.cardsTable = (List<Card>[]) new List[4];
         for (int i = 0; i < 4; i++) {
             this.cardsTable[i] = new LinkedList<>();
         }

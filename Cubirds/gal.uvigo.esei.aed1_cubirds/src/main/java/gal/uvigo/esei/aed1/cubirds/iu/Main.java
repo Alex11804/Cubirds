@@ -1,4 +1,3 @@
-
 package gal.uvigo.esei.aed1.cubirds.iu;
 
 import gal.uvigo.esei.aed1.cubirds.core.Game;

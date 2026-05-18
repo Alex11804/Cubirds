@@ -75,7 +75,7 @@ private int[] count;
 
 
     public boolean increaseCount(int selectedBird){
-        if(hand.get(selectedBird).size()>hand.get(selectedBird).getFirst().getSmallFlock()){
+        if(hand.get(selectedBird).size()>=hand.get(selectedBird).getFirst().getSmallFlock()){
             TypeBird selectedType = hand.get(selectedBird).getFirst().getTypeBird();
             count[selectedType.ordinal()]++;
             return true;
@@ -86,7 +86,7 @@ private int[] count;
     public int getCount() {
         int contador = 0;
         for (int i = 0; i < count.length; i++) {
-            count[i]+=contador;
+            contador += count[i];
         }
         return contador;
     }
