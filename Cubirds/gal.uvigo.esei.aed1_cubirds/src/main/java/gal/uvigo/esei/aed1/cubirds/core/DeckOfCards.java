@@ -28,8 +28,8 @@ public class DeckOfCards {
 
     public void shuffle(){
         Random random = new Random();            //Creamos un objeto random para generar numeros aleatorios 
-        for(int i = 0 ; i <= 109 ; i++){        //Recorremos las 110 cartas que tenemos 
-            int numero = random.nextInt(109);  // Generamos el numero alatorio-> que usamos como indice (posicion de 1 carta)
+        for(int i = 0 ; i <= cards.size(); i++){        //Recorremos las 110 cartas que tenemos 
+            int numero = random.nextInt(cards.size());  // Generamos el numero alatorio-> que usamos como indice (posicion de 1 carta)
             Card temp = cards.get(i);         //Guardamos la carta actual en una variable temporal
             cards.set(i, cards.get(numero)); //Intercambias la carta en la posicion i con la carta en la posicion aleatoria numero
             cards.set(numero, temp);        //Pones en numero la carta original de i (guardada en temp)

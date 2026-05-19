@@ -34,30 +34,30 @@ private IU iu;
 
         do {
 
-            if (i == players.size()) { // Si llegas al final de los jugadores
-                i = 0; // Vuelves al principio
+            if (i == players.size()) {                          // Si llegas al final de los jugadores
+                i = 0;                                         // Vuelves al principio
             }
 
             actualPlayer = players.get(i);
-            turnoJugador(actualPlayer); // el jugador ejecuta su turno
+            turnoJugador(actualPlayer);                     // el jugador ejecuta su turno
 
-            if (actualPlayer.winner()) { // Si el jugador ganó-> se termina la ronda
+            if (actualPlayer.winner()) {                  // Si el jugador ganó-> se termina la ronda
                 isWinner = true;
-            } else if (players.get(i).handIsEmpty()) { // Si el jugador se quedó sin cartas
-                noHayCartas();
+            } else if (players.get(i).handIsEmpty()) {  // Si el jugador se quedó sin cartas
+                notEnoughCards();
                 continueGame = dealCardsToPlayer();
             }
             i++;
 
         } while (continueGame && !isWinner);
 
-        if (!continueGame) {// Despues de cada ronda, se repartes cartas, hasta que se quede sin ellas
-            int maxCont = 0; // Mayor puntuacion
-            int posPlayer = 0; // posicion del jugador
-            for (int j = 0; j < players.size(); j++) { // Busca quien tiene mas pajaros bajados
-                if (players.get(j).getCount() > maxCont) { // Si el jugador tiene mas puntos
+        if (!continueGame) {                                                      // Despues de cada ronda, se repartes cartas, hasta que se quede sin ellas
+            int maxCont = 0;                                                     // Mayor puntuacion
+            int posPlayer = 0;                                                  // posicion del jugador
+            for (int j = 0; j < players.size(); j++) {                         // Busca quien tiene mas pajaros bajados
+                if (players.get(j).getCount() > maxCont) {                    // Si el jugador tiene mas puntos
                     maxCont = players.get(j).getCount();
-                    posPlayer = j; // Actualiza el ganador actual
+                    posPlayer = j;                                          // Actualiza el ganador actual
                 }
             }
             iu.displayMessage(
@@ -65,13 +65,12 @@ private IU iu;
                                                                                                                     // el
                                                                                                                     // ganador
         } else {
-            iu.displayMessage(actualPlayer.getName() +
-                    " ha conseguido 7 especies de pájaros distintas");
+            iu.displayMessage(actualPlayer.getName() +" ha conseguido 7 especies de pájaros distintas");
         }
 
     }
 
-      /**
+    /**
      * createPlayers:Inicializar los jugadores y definirlos 
      */
 
@@ -91,13 +90,13 @@ private IU iu;
      * dealCardsToPlayer: Repartir 8 cartas a los jugadores, devolviedo false en el caso de que no haya suficientes cartas a repartir 
      */
     public boolean dealCardsToPlayer(){            
-        for (int i = 0; i < 8; i++) {      //Bucle para cuando i=7 (igual a 8 cartas)
-            for (Player player:players) {  //Recorre todos los jugadores
-                Card card = deckOfCards.takeCard();  //Saca una carta de la baraja y la guarda en la variable cards
-                if(card != null){                    //Si quedan cartas en el mazo -> Añade esa carta que se ha eliminado de la baraja al jugador
+        for (int i = 0; i < 8; i++) {                     //Bucle para cuando i=7 (igual a 8 cartas)
+            for (Player player:players) {                //Recorre todos los jugadores
+                Card card = deckOfCards.takeCard();     //Saca una carta de la baraja y la guarda en la variable cards
+                if(card != null){                      //Si quedan cartas en el mazo -> Añade esa carta que se ha eliminado de la baraja al jugador
                     player.addCard(card);
                 }else{
-                    return false;   // boolean para comprobar si hay suficienes cartas para repartir
+                    return false;                   // boolean para comprobar si hay suficienes cartas para repartir
                 }
             }
         }
@@ -109,8 +108,8 @@ private IU iu;
      * o haya un ganador 
      */
 
-    private void noHayCartas(){
-        for(Player player : players){                                //Recorre las cartas de todos los jugadores
+    private void notEnoughCards(){
+        for(Player player : players){                                     //Recorre las cartas de todos los jugadores
                 int j = 0;
                 while(!player.handIsEmpty()){                           //vacia la mano de cada jugador
                     discardedCards.addCardToEnd(player.removeCards(j));//elimina las cartas de su mano y las añade al monton de descartes
