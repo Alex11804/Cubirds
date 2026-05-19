@@ -81,7 +81,7 @@ public class IU {
         int toret = -1;
         do {
            toret = readNumber(msg);
-        } while ( toret < 0 || toret > tam);
+        } while ( toret < 0 || toret >= tam);
 
         return toret;
     }

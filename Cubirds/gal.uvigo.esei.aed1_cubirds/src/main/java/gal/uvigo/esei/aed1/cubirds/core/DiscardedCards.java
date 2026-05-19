@@ -19,7 +19,14 @@ public class DiscardedCards {
     }
 
     public List<Card> removeCards (){  //Solo se elimina toda la lista
-        return discardedCards; 
+        List <Card> eliminateCards = new LinkedList<>();
+        while(!discardedCards.isEmpty()){
+            eliminateCards.addLast(discardedCards.removeFirst());
+        }
+        return eliminateCards;
+    }
+    public int tamanho(){
+        return discardedCards.size();
     }
 
     

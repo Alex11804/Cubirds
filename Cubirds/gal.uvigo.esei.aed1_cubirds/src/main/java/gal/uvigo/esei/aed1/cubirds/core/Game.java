@@ -44,7 +44,7 @@ private IU iu;
             if (actualPlayer.winner()) {                  // Si el jugador ganó-> se termina la ronda
                 isWinner = true;
             } else if (players.get(i).handIsEmpty()) {  // Si el jugador se quedó sin cartas
-                notEnoughCards();
+                deletePlayerCards();
                 continueGame = dealCardsToPlayer();
             }
             i++;
@@ -108,7 +108,7 @@ private IU iu;
      * o haya un ganador 
      */
 
-    private void notEnoughCards(){
+    private void deletePlayerCards(){
         for(Player player : players){                                     //Recorre las cartas de todos los jugadores
                 int j = 0;
                 while(!player.handIsEmpty()){                           //vacia la mano de cada jugador
@@ -120,42 +120,16 @@ private IU iu;
         
     }
 
-    /* public void playCards(){ 
-        Player actualPlayer= null; 
-        boolean finRonda = false;                  //Indica si la ronda ha terminado
-        int i = 0;                                                  
-        do{                                         //Mientras que no se acaba la ronda              
-            if(i == players.size()){             //Si llegas al final de los jugadores
-                i = 0;                          //Vuelves al principio
-            } 
-            actualPlayer= players.get(i); 
-            turnoJugador(actualPlayer);      //el jugador ejecuta su turno
-
-             if(actualPlayer.winner()){     //Si el jugador ganó-> se termina la ronda 
-            finRonda = true;
-            }
-
-            if(players.get(i).handIsEmpty()){ //Si el jugador se quedó sin cartas
-                finRonda = true;             //Se acabo la ronda
-            }
-            i++;                            //Si no se quedo sin cartas-> siguiente jugador
-        }while(!finRonda);   //este bucle continua mientras que no se acaba la ronda (algn se queda sin cartas) o no haya un ganador
-
-        if(!players.get(i).winner()){     //Si no hay un ganador 
-            for(Player player : players){                                //Recorre las cartas de todos los jugadores
-                int j = 0;
-                while(!player.handIsEmpty()){                           //vacia la mano de cada jugador
-                    discardedCards.addCardToEnd(player.removeCards(j));//elimina las cartas de su mano y las añade al monton de descartes
-                }
-            }
-            deckOfCards.addListCards(discardedCards.removeCards());  //las cartas descartadas vuelven al mazo original
-        }
-    }*/
+  
 
     /**
      * turnoJugador: Controla todo el turno de un jugador dentro del juego
      * */
     public void turnoJugador(Player player){
+
+        iu.displayMessage("Quedan " + deckOfCards.tamanho() + " cartas en la baraja");
+        iu.displayMessage("Hay " + discardedCards.tamanho() + " cartas en descartes " + "\n");
+
         iu.displayMessage(table.toString());
         iu.displayMessage("Turno de: " + player.getName() + "\n"); 
 

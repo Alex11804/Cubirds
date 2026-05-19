@@ -62,4 +62,7 @@ public class DeckOfCards {
         }
         
     }
+    public int tamanho(){
+        return cards.size();
+    }
 }

@@ -101,12 +101,24 @@ private int[] count;
         return (contador >= 7);
     }
 
+    private int numEspeciesDistintas(){
+        int contador=0;
+        for (int i = 0; i < count.length; i++) {
+            if(count[i]>0){
+                contador++;
+            }
+        }
+        return (contador);
+    }
+
     
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(name).append(":\n");  //Se muestra el jugador 
+        sb.append(name).append(":\n");  //Se muestra el jugador
+        sb.append("Total de especies bajadas: ").append(getCount()).append("\n"); 
+        sb.append("Especies distintas bajadas: ").append(numEspeciesDistintas()).append("\n\n"); 
         for (int i = 0; i < hand.size() ; i++) {     //recorremos TODA la mano (incluida nuevas filas) (hand.size())
             sb.append(i + ". // ");
             for(Card c:hand.get(i)){   //Recorre todas las cartas que tiene en la mano ese jugador 
